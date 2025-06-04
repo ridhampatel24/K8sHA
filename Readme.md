@@ -20,7 +20,7 @@
 ## 2. Install Container Runtime (containerd) and the change the Cgroup driver of the containerd to systemd
 
 
-    User docker installation docs to add the repository [link](https://docs.docker.com/engine/install/ubuntu/).
+    User docker installation docs to add the repository [link](https://docs.docker.com/engine/install/ubuntu/) .
 
 ```bash
     # Add Docker's official GPG key:
