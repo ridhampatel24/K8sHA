@@ -64,7 +64,7 @@
 
 ## 4. Etcd Setup
 
-### Use the below script to install the etcd
+### 1. Use the below script to install the etcd
 
 ```bash
     #!/bin/bash
@@ -111,6 +111,17 @@
     etcd --version
     etcdctl version
     etcdutl version
+```
+### 2. Generate certificates for the Etcd ssl communication
+
+
+#### > Generate CA certs and Key
+
+```bash
+    sudo mkdir -p /etc/etcd/ssl
+    cd /etc/etcd/ssl
+    openssl genrsa -out ca.key 4096
+    openssl req -x509 -new -nodes -key ca.key -subj "/CN=etcd-ca" -days 1000 -out ca.crt
 ```
 
 
