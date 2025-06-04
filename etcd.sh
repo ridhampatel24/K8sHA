@@ -3,7 +3,6 @@
 
 #sudo apt  install etcd-client
 set -euo pipefail
-
 ETCD_VER=v3.6.0
 
 # Choose download source
@@ -44,11 +43,3 @@ echo "Installed versions:"
 etcd --version
 etcdctl version
 etcdutl version
-
-
-# # start a local etcd server
-# /usr/local/bin/etcd
-
-# # write,read to etcd
-# /usr/local/bin/etcdctl --endpoints=localhost:2379 put foo bar
-# /usr/local/bin/etcdctl --endpoints=localhost:2379 get foo
