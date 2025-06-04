@@ -130,6 +130,10 @@
 
     ## openssl.cnf file is required to generate the etcd server certs
     ## openssl.cnf file content is as follows
+```
+##### openssl.cnf
+
+```bash
     [ req ]
     distinguished_name = req_distinguished_name
     req_extensions = v3_req
@@ -148,6 +152,8 @@
     IP.1 = 127.0.0.1
     # Replace with your VM IP
     IP.2 = 192.168.1.4
+```
+```bash
 
     ## Generate the etcd server certificate signing request (CSR)
     openssl req -new -key etcd.key -out etcd.csr -config openssl.cnf
