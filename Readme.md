@@ -163,6 +163,7 @@
     ## etcd-client-openssl.conf file is required to generate the client certs
     ## etcd-client-openssl.conf file content is as follows
 ```
+
 ```bash
     [ req ]
     distinguished_name = req_distinguished_name
@@ -176,6 +177,7 @@
     keyUsage = critical, digitalSignature, keyEncipherment
     extendedKeyUsage = clientAuth
 ```
+
 ```bash
     ## Generate the client certificate signing request (CSR)
     openssl req -new -key client.key -out etcd-client.csr -config etcd-client-openssl.conf
