@@ -1,0 +1,18 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: "135.235.144.80:6443"
+    token: 56q6t5.s1rb3b76sldfw8lt
+    caCertHashes:
+      - "sha256:38b8ca4ecdea58980179c9d4427dd0ca111a357174b535b1d36b6e2fd92c09c7"
+
+controlPlane:
+  localAPIEndpoint:
+    advertiseAddress: 192.168.2.5
+    bindPort: 6443
+  certificateKey: "7f6a0f26857429a04a7b178a007ad68c7bf33aa87598fffef9926135ec91d592"
+  
+nodeRegistration:
+  name: k8s-master-2
+  criSocket: unix:///var/run/containerd/containerd.sock
