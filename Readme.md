@@ -123,6 +123,42 @@
     openssl genrsa -out ca.key 4096
     openssl req -x509 -new -nodes -key ca.key -subj "/CN=etcd-ca" -days 1000 -out ca.crt
 ```
+#### > Generate etcd server certs and key
+
+```bash
+    openssl genrsa -out etcd.key 4096
+
+    ##openssl.cnf file is required to generate the etcd server certs
+    ##openssl.cnf file content is as follows
+    [ req ]
+    distinguished_name = req_distinguished_name
+    req_extensions = v3_req
+    prompt = no
+
+    [ req_distinguished_name ]
+    CN = etcd-server
+
+    [ v3_req ]
+    keyUsage = critical, digitalSignature, keyEncipherment
+    extendedKeyUsage = serverAuth, clientAuth
+    subjectAltName = @alt_names
+
+    [ alt_names ]
+    DNS.1 = localhost
+    IP.1 = 127.0.0.1
+    # Replace with your VM IP
+    IP.2 = 192.168.1.4
+
+    ## Generate the etcd server certificate signing request (CSR)
+    openssl req -new -key etcd.key -out etcd.csr -config openssl.cnf
+
+    ## Generate the etcd server certificate using the CA certs and key
+    openssl x509 -req -in etcd.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out etcd.crt -days 1000 -extensions v3_req -extfile openssl.cnf
+```
+#### > Create openssl.cnf file
+
+
+
 
 
 
