@@ -64,11 +64,11 @@
 
 ## 4. Etcd Setup
 
-    Use the below script to install the etcd
+### Use the below script to install the etcd
 
 ```bash
     #!/bin/bash
-    
+
     #sudo apt  install etcd-client
     set -euo pipefail
     ETCD_VER=v3.6.0
