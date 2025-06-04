@@ -23,6 +23,7 @@
     User docker installation docs to add the repository [link](https://docs.docker.com/engine/install/ubuntu/) .
 
 ```bash
+
     # Add Docker's official GPG key:
     sudo apt-get update
     sudo apt-get install ca-certificates curl
@@ -38,13 +39,15 @@
     sudo apt-get update
     sudo apt-get install containerd.io
 
+    # change cgroup driver
+
     sudo mkdir -p /etc/containerd 
     containerd config default | sudo tee /etc/containerd/config.toml
     sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
     sudo systemctl restart containerd 
     sudo systemctl enable containerd
 
-    Also change the sandbox image as required by the k8s version
+    # Also change the sandbox image as required by the k8s version
 
 ```
 
