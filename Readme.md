@@ -205,7 +205,9 @@
 ### 3. Run ETCD as a systemd service
 
 ```bash
-
+    # Change the IP address in the below command to your VM IP address
+    sudo mkdir -p /var/lib/etcd
+    
     sudo tee /etc/systemd/system/etcd.service <<EOF
     [Unit]
     Description=etcd key-value store
