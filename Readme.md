@@ -128,8 +128,8 @@
 ```bash
     openssl genrsa -out etcd.key 4096
 
-    ##openssl.cnf file is required to generate the etcd server certs
-    ##openssl.cnf file content is as follows
+    ## openssl.cnf file is required to generate the etcd server certs
+    ## openssl.cnf file content is as follows
     [ req ]
     distinguished_name = req_distinguished_name
     req_extensions = v3_req
