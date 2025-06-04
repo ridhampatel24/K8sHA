@@ -1,4 +1,4 @@
-# K8s Setup HA in Azure
+# K8s Setup HA
 
 
 ## Pre Flight Checks 
@@ -112,7 +112,7 @@
     etcdctl version
     etcdutl version
 ```
-### 2. Generate certificates for the Etcd ssl communication
+### 2. Generate certificates for the Etcd SSL communication
 
 
 #### > Generate CA certs and Key
@@ -200,6 +200,42 @@
     openssl x509 -in ca.crt -text -noout
 ```
 #### > Copy the generated certificates to the master nodes
+
+
+### 3. Run ETCD as a systemd service
+
+```bash
+
+    sudo tee /etc/systemd/system/etcd.service <<EOF
+    [Unit]
+    Description=etcd key-value store
+    Documentation=https://etcd.io/docs/
+    After=network.target
+
+    [Service]
+    Type=notify
+    ExecStart=/usr/local/bin/etcd \
+    --name etcd-server \
+    --data-dir /var/lib/etcd \
+    --listen-client-urls https://192.168.1.4:2379,https://127.0.0.1:2379 \
+    --advertise-client-urls https://192.168.1.4:2379 \
+    --cert-file /etc/etcd/ssl/etcd.crt \
+    --key-file /etc/etcd/ssl/etcd.key \
+    --trusted-ca-file /etc/etcd/ssl/ca.crt \
+    --client-cert-auth=true
+    Restart=on-failure
+    RestartSec=5
+    LimitNOFILE=40000
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+    sudo systemctl daemon-reload
+    sudo systemctl enable etcd
+    sudo systemctl start etcd
+```
+
+
 
 
 
