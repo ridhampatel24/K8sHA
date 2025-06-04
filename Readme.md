@@ -1,18 +1,21 @@
 # K8s Setup HA in Azure
 
 
-Pre Flight Checks 
+## Pre Flight Checks 
 
-1. Disable swap memory in the all VMs
+## 1. Disable swap memory in the all VMs
+
+```bash
 
     sudo swapoff -a
-    Above cmd will disable swap memory temporary until next reboot
+    # Above cmd will disable swap memory temporary until next reboot
 
     sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
     Need to comment the swap line in /etc/fstab to disable it permanently.
 
     To verify it run 
     free -h
+```
 
 2. Install Container Runtime (containerd) and the change the Cgroup driver of the containerd to systemd
 
