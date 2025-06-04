@@ -169,7 +169,7 @@
     ## etcd-client-openssl.conf file is required to generate the client certs
     ## etcd-client-openssl.conf file content is as follows
 ```
-##### openssl.cnf
+##### etcd-client-openssl.conf
 ```bash
     [ req ]
     distinguished_name = req_distinguished_name
