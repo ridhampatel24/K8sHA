@@ -17,9 +17,9 @@
     free -h
 ```
 
-2. Install Container Runtime (containerd) and the change the Cgroup driver of the containerd to systemd
+## 2. Install Container Runtime (containerd) and the change the Cgroup driver of the containerd to systemd
 
-
+```bash
     User docker installation docs to add the repository
 
     https://docs.docker.com/engine/install/ubuntu/
@@ -47,6 +47,7 @@
 
     Also change the sandbox image as required by the k8s version
 
+```
 
 3. Configure Kernel Parameters
 
