@@ -155,7 +155,39 @@
     ## Generate the etcd server certificate using the CA certs and key
     openssl x509 -req -in etcd.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out etcd.crt -days 1000 -extensions v3_req -extfile openssl.cnf
 ```
-#### > Create openssl.cnf file
+#### > Create client certs and key
+
+```bash
+    openssl genrsa -out client.key 2048
+
+    ## etcd-client-openssl.conf file is required to generate the client certs
+    ## etcd-client-openssl.conf file content is as follows
+    [ req ]
+    distinguished_name = req_distinguished_name
+    req_extensions = v3_req
+    prompt = no
+
+    [ req_distinguished_name ]
+    CN = etcd-client
+
+    [ v3_req ]
+    keyUsage = critical, digitalSignature, keyEncipherment
+    extendedKeyUsage = clientAuth
+
+    ## Generate the client certificate signing request (CSR)
+    openssl req -new -key client.key -out etcd-client.csr -config etcd-client-openssl.conf
+
+    ## Generate the client certificate using the CA certs and key
+    openssl x509 -req -in etcd-client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 365 -extensions v3_req -extfile etcd-client-openssl.conf
+```
+#### > Verify the generated certificates
+
+```bash
+    openssl x509 -in etcd.crt -text -noout
+    openssl x509 -in client.crt -text -noout
+    openssl x509 -in ca.crt -text -noout
+```
+#### > Copy the generated certificates to the master nodes
 
 
 
